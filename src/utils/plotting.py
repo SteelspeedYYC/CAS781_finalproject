@@ -1,41 +1,13 @@
-"""
-helper.py
-
-General utility functions for experiment logging, saving results,
-and plotting.
-"""
-
 from __future__ import annotations
 
-from pathlib import Path
 from typing import Iterable, Optional
+from pathlib import Path
 
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 
-
-def ensure_dir(path: str | Path) -> Path:
-    path = Path(path)
-    path.mkdir(parents=True, exist_ok=True)
-    return path
-
-
-def moving_average(values: Iterable[float], window: int = 20) -> np.ndarray:
-    values = np.asarray(list(values), dtype=float)
-
-    if window <= 1 or len(values) < window:
-        return values
-
-    kernel = np.ones(window) / window
-    smoothed = np.convolve(values, kernel, mode="valid")
-    return smoothed
-
-
-def save_results_csv(df: pd.DataFrame, filepath: str | Path) -> None:
-    filepath = Path(filepath)
-    ensure_dir(filepath.parent)
-    df.to_csv(filepath, index=False)
+from .metrics import moving_average
+from .logging import ensure_dir
 
 
 def plot_rewards(
