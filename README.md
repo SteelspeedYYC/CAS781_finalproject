@@ -43,23 +43,23 @@ We perform a controlled experiment:
 
 ## Project Structure
 
+```text
 src/
-  ├── env/
-  │     └── env_factory.py
-  ├── agents/
-  │     └── q_learning.py
-  ├── utils/
-  │     ├── plotting.py
-  │     └── logging.py
-  ├── experiments/
-  │     └── grid_search.py
+├── algo/
+│   └── q_learning.py
+├── env/
+│   └── env_factory.py
+├── utils/
+│   └── helper.py
 
 results/
-  ├── csv/
-  └── plots/
+├── plots/
+├── raw/
 
+experiment.ipynb
 README.md
 requirements.txt
+```
 
 ## How to Run
 
@@ -75,7 +75,7 @@ Run grid search:
 
 python experiments/grid_search.py
 
-    ## Results
+## Results
 
 Example output:
 
