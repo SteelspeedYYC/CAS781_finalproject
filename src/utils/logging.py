@@ -59,12 +59,34 @@ def append_record_to_csv(record: Dict[str, Any], filepath: str | Path) -> None:
 def fmt(x):
     return f"{x:.3f}".rstrip("0").rstrip(".")
 
+
 def make_run_name(config, env_name: str, seed: int) -> str:
     return (
         f"{env_name}"
         f"_a{fmt(config.alpha)}"
         f"_g{fmt(config.gamma)}"
-        f"_eps{fmt(config.epsilon)}"
-        f"_dec{fmt(config.epsilon_decay)}"
         f"_seed{seed}"
     )
+
+
+def load_reward_sequences(
+    env_name: str,
+    alpha: float,
+    gamma: float,
+    seeds: list[int],
+    base_dir: str = "results/raw/trajectories",
+):
+    sequences = []
+
+    for seed in seeds:
+        file_name = f"{env_name}_a{alpha}_g{gamma}_seed{seed}.csv"
+        file_path = Path(base_dir) / file_name
+
+        if not file_path.exists():
+            print(f"[Warning] Missing file: {file_path}")
+            continue
+
+        df = pd.read_csv(file_path)
+        sequences.append(df["reward"].values)
+
+    return sequences
