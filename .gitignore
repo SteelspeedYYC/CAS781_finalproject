@@ -1,3 +1,5 @@
 # Ignore experiment outputs only
 results/raw/*
 results/plots/*
+__pycache__/
+*.pyc
