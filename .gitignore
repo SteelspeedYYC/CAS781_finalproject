@@ -3,3 +3,4 @@ results/raw/*
 results/plots/*
 __pycache__/
 *.pyc
+*.png
